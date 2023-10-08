@@ -53,6 +53,13 @@ namespace APIs.Controllers
       IEnumerable<PaisLenguaje> empresas = new EmpresasService(_configuration.GetConnectionString("ConnectionMySQL")).ObtenerLenguajePaisesMySQL(inPais);
       return Ok(empresas);
     }
+    
+    [HttpPost("ObtenerLenguajePaisSP")]
+    public ActionResult ObtenerLenguajePaisSP(Pais inPais)
+    {
+      IEnumerable<PaisLenguaje> empresas = new EmpresasService(_configuration.GetConnectionString("ConnectionMySQL")).ObtenerLenguajeSPPaisesMySQL(inPais);
+      return Ok(empresas);
+    }
 
 
   }

@@ -97,5 +97,23 @@ namespace BLL
       return empresas;
     }
 
+    public IEnumerable<PaisLenguaje> ObtenerLenguajeSPPaisesMySQL(Pais inPais)
+    {
+      string consultaSql = $"CALL sp_obtenerLenguajes(@codPais)";
+      var parametros = new Dictionary<string, object>();
+      parametros["@codPais"] = inPais.Codigo.ToString();
+
+      IEnumerable<PaisLenguaje> empresas = base.EjecutarComandoMySQL(consultaSql, parametros, (MySqlDataReader record) =>
+      {
+        return new PaisLenguaje
+        {
+          CodigoPais = record["CountryCode"].ToString(),
+          Lenguaje = record["Language"].ToString()
+        };
+      });
+
+      return empresas;
+    }
+
   }
 }
